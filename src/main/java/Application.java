@@ -11,8 +11,8 @@ import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
 import org.nd4j.linalg.dataset.DataSet;
 import org.nd4j.linalg.dataset.api.iterator.DataSetIterator;
 import org.nd4j.linalg.lossfunctions.LossFunctions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 
 import java.util.Collections;
 
@@ -23,21 +23,21 @@ import java.util.Collections;
  */
 public class Application {
 
-    private static Logger log = LoggerFactory.getLogger(Application.class);
+//    private static Logger log = LoggerFactory.getLogger(Application.class);
 
     public static void main(String[] args) throws Exception {
         final int numRows = 28;
         final int numColumns = 28;
         int seed = 123;
         int numSamples = MnistDataFetcher.NUM_EXAMPLES;
-        int batchSize = 1000;
+        int batchSize = 100;
         int iterations = 1;
         int listenerFreq = iterations/5;
 
-        log.info("Load data....");
+//        log.info("Load data....");
         DataSetIterator iter = new MnistDataSetIterator(batchSize,numSamples,true);
 
-        log.info("Build model....");
+//        log.info("Build model....");
         MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
                 .seed(seed)
                 .iterations(iterations)
@@ -61,7 +61,7 @@ public class Application {
 
         model.setListeners(Collections.singletonList((IterationListener) new ScoreIterationListener(listenerFreq)));
 
-        log.info("Train model....");
+//        log.info("Train model....");
         while(iter.hasNext()) {
             DataSet next = iter.next();
             model.fit(new DataSet(next.getFeatureMatrix(),next.getFeatureMatrix()));
